@@ -61,53 +61,53 @@
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 
 
-;; Add ECB pack and set custom configuration
-(live-add-pack-lib "ecb")
-(require 'ecb)
-;; CHANGE THIS TO THE PATH TO YOUR SOURCES
-;; (note that you can also modify the relevant property to add multiple dirs)
-(defvar start-dir "/Users/neo/Documents/Projects")
-(custom-set-variables
- '(ecb-options-version "2.32")
- '(ecb-source-path (list start-dir))
- '(ecb-tip-of-the-day nil)
- '(inhibit-startup-screen t))
+;; ;; Add ECB pack and set custom configuration
+;; (live-add-pack-lib "ecb")
+;; (require 'ecb)
+;; ;; CHANGE THIS TO THE PATH TO YOUR SOURCES
+;; ;; (note that you can also modify the relevant property to add multiple dirs)
+;; (defvar start-dir "/Users/neo/Documents/Projects")
+;; (custom-set-variables
+;;  '(ecb-options-version "2.32")
+;;  '(ecb-source-path (list start-dir))
+;;  '(ecb-tip-of-the-day nil)
+;;  '(inhibit-startup-screen t))
 
 
-;; Function that creates a speedbar, but in the same frame vs. the
-;; default separate frame
-(require 'speedbar)
-(defconst my-speedbar-buffer-name " SPEEDBAR")
-(defun my-speedbar-no-separate-frame ()
-    (interactive)
-    (when (not (buffer-live-p speedbar-buffer))
-      (setq speedbar-buffer (get-buffer-create my-speedbar-buffer-name)
-            speedbar-frame (selected-frame)
-            dframe-attached-frame (selected-frame)
-            speedbar-select-frame-method 'attached
-            speedbar-verbosity-level 0
-            speedbar-last-selected-file nil)
-      (set-buffer speedbar-buffer)
-      (speedbar-mode)
-      (speedbar-reconfigure-keymaps)
-      (speedbar-update-contents)
-      (speedbar-set-timer 1)
-      (add-hook 'kill-buffer-hook
-                (lambda () (when (eq (current-buffer) speedbar-buffer)
-                             (setq speedbar-frame nil
-                                   dframe-attached-frame nil
-                                   speedbar-buffer nil)
-                             (speedbar-set-timer nil)))))
-;;    (message "CATS!!!!")
-    (set-window-buffer (selected-window)
-                       (get-buffer my-speedbar-buffer-name))
-    )
-;; Start Speedbar
-;; (my-speedbar-separate-frame)
-(my-speedbar-no-separate-frame)
-;; Speedbar customizations
-(speedbar-add-supported-extension ".clj")
-(setq speedbar-show-unknown-files t)
+;; ;; Function that creates a speedbar, but in the same frame vs. the
+;; ;; default separate frame
+;; (require 'speedbar)
+;; (defconst my-speedbar-buffer-name " SPEEDBAR")
+;; (defun my-speedbar-no-separate-frame ()
+;;     (interactive)
+;;     (when (not (buffer-live-p speedbar-buffer))
+;;       (setq speedbar-buffer (get-buffer-create my-speedbar-buffer-name)
+;;             speedbar-frame (selected-frame)
+;;             dframe-attached-frame (selected-frame)
+;;             speedbar-select-frame-method 'attached
+;;             speedbar-verbosity-level 0
+;;             speedbar-last-selected-file nil)
+;;       (set-buffer speedbar-buffer)
+;;       (speedbar-mode)
+;;       (speedbar-reconfigure-keymaps)
+;;       (speedbar-update-contents)
+;;       (speedbar-set-timer 1)
+;;       (add-hook 'kill-buffer-hook
+;;                 (lambda () (when (eq (current-buffer) speedbar-buffer)
+;;                              (setq speedbar-frame nil
+;;                                    dframe-attached-frame nil
+;;                                    speedbar-buffer nil)
+;;                              (speedbar-set-timer nil)))))
+;; ;;    (message "CATS!!!!")
+;;     (set-window-buffer (selected-window)
+;;                        (get-buffer my-speedbar-buffer-name))
+;;     )
+;; ;; Start Speedbar
+;; ;; (my-speedbar-separate-frame)
+;; (my-speedbar-no-separate-frame)
+;; ;; Speedbar customizations
+;; (speedbar-add-supported-extension ".clj")
+;; (setq speedbar-show-unknown-files t)
 
 
 ;; Start ECB mode
